@@ -10,6 +10,7 @@ export class AarToolComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // Retrieve users from API.
   }
 
 }
