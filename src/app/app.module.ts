@@ -22,6 +22,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ApplicationsComponent } from './applications/applications.component';
 import { AarToolComponent } from './aar-tool/aar-tool.component';
+import { UserService } from './user.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -46,9 +48,10 @@ import { AarToolComponent } from './aar-tool/aar-tool.component';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
