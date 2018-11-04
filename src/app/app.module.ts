@@ -14,7 +14,8 @@ import {
   MatSidenavModule,
   MatListModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatInputModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +45,7 @@ import { AarToolComponent } from './aar-tool/aar-tool.component';
     MatSidenavModule,
     MatListModule,
     MatFormFieldModule,
+    MatInputModule,
     MatSelectModule
   ],
   providers: [],
