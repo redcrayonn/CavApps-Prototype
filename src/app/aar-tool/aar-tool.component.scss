@@ -1,8 +1,17 @@
 .example-container {
     display: flex;
     flex-direction: column;
+    flex-basis:50%;
+    
   }
   
   .example-container > * {
     width: 100%;
+  }
+
+  #temp-center
+  {
+    width:80%;
+    margin:auto;
+    margin-top:2em;
   }

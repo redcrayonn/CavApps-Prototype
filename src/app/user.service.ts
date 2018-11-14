@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,20 +22,26 @@ export class UserService {
       btoa('username:password'));
   }
 
-  getAll() {
+    getAll(): Observable<User[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.API_AUTH_HEADER });
     const options = { headers: headers };
-    console.log(options);
-    return this.http.get(this.API_URL + '/users/active', options)
-        .subscribe(
-            res => {
-                console.log(res);
-            },
-            err => {
-                console.log(err.message);
-            }
-        );
+    return this.http.get<UserResult>(this.API_URL + '/users/active', options).pipe(map(r => r.data.users));
   }
+}
+
+export class User {
+  join_date: string;
+  promotion_date: string;
+  user_id: number;
+  username: string;
+}
+
+export class UserResult {
+  data: UserResultDeeper;
+}
+
+export class UserResultDeeper {
+ users: User[];
 }
