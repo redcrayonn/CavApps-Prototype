@@ -16,7 +16,9 @@ import {
   MatFormFieldModule,
   MatSelectModule,
   MatInputModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AppRoutingModule } from './app-routing.module';
@@ -53,7 +55,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     HttpClientModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
