@@ -17,6 +17,7 @@ export class AarToolComponent implements OnInit {
   retrievedUsers: User[];
   myControl = new FormControl();
   supportedGames = ['Arma 3', 'Squad', 'Post Scriptum'];
+  operationTypes = ['Coop', 'Tvt'];
 
   filteredOptions: Observable<User[]>;
 
