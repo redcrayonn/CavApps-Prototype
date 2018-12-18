@@ -24,12 +24,13 @@ export class AarToolComponent implements OnInit {
   constructor(private user: UserService) { }
 
   ngOnInit() {
-    this.user.getAll().subscribe(r => {this.retrievedUsers = r; console.log(r); this.filteredOptions = this.myControl.valueChanges
+    this.user.getAll().subscribe(r => {this.retrievedUsers = r; this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith<string | User>(''),
         map(value => typeof value === 'string' ? value : value.username),
         map(name => name ? this._filter(name) : this.retrievedUsers.slice())
-      ); });
+      );
+    });
   }
 
   displayFn(user?: User): string | undefined {
@@ -41,5 +42,4 @@ export class AarToolComponent implements OnInit {
 
     return this.retrievedUsers.filter(option => option.username.toLowerCase().indexOf(filterValue) === 0);
   }
-
 }

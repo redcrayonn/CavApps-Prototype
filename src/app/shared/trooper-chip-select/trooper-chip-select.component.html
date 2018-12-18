@@ -1,0 +1,27 @@
+<mat-form-field class="list">
+  <mat-chip-list #chipList>
+    <mat-chip
+      *ngFor="let user of selectedUsers"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(user)">
+      {{user.username}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input
+      placeholder="New users..."
+      #fruitInput
+      [formControl]="userCtrl"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur"
+      
+      >
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+      {{user.username}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

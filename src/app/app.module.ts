@@ -18,7 +18,8 @@ import {
   MatInputModule,
   MatAutocompleteModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatChipsModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +29,7 @@ import { AarToolComponent } from './aar-tool/aar-tool.component';
 import { UserService } from './user.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TrooperChipSelectComponent } from './shared/trooper-chip-select/trooper-chip-select.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     HomeComponent,
     ApplicationsComponent,
-    AarToolComponent
+    AarToolComponent,
+    TrooperChipSelectComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatChipsModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
