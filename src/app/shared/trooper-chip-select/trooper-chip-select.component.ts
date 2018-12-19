@@ -13,6 +13,8 @@ import { User, UserService } from '../../user.service';
 })
 export class TrooperChipSelectComponent implements OnInit {
 
+  @Input() placeholder: string;
+
   visible = true;
   selectable = true;
   removable = true;

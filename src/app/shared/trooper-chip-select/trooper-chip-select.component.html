@@ -9,7 +9,7 @@
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
     <input
-      placeholder="New users..."
+      [placeholder]="placeholder"
       #fruitInput
       [formControl]="userCtrl"
       [matAutocomplete]="auto"
