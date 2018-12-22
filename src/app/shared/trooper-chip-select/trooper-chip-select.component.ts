@@ -77,7 +77,6 @@ export class TrooperChipSelectComponent implements OnInit {
   }
 
   private _filter(filterValue: string): User[] {
-    console.log('filtering');
-    return this.allUsers.filter(user => user.username.toLowerCase().indexOf(filterValue) === 0);
+    return this.allUsers.filter(user => !this.selectedUsers.find(x => x.user_id === user.user_id) && user.username.toLowerCase().indexOf(filterValue) === 0);
   }
 }
