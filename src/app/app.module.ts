@@ -30,6 +30,7 @@ import { UserService } from './user.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TrooperChipSelectComponent } from './shared/trooper-chip-select/trooper-chip-select.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { TrooperChipSelectComponent } from './shared/trooper-chip-select/trooper
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSlideToggleModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

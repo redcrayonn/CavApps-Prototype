@@ -1,18 +1,26 @@
 <div id="temp-center" class="example-container">
+  
+  <mat-slide-toggle
+        class="example-margin"
+        checked="isOICPost"
+        (change)="isOICPost = !isOICPost">
+        Slide me!
+    </mat-slide-toggle>
 
-  <mat-form-field class="">
+  <!-- OIC post form -->
+  <mat-form-field class="" *ngIf="isOICPost">
     <input matInput placeholder="Name of combat mission" value="">
   </mat-form-field>
 
-  <mat-form-field class="">
+  <mat-form-field class="" *ngIf="isOICPost">
     <input matInput placeholder="Campaign of Combat Mission (If applicable)" value="">
   </mat-form-field>
 
-  <mat-form-field class="">
+  <mat-form-field class="" *ngIf="isOICPost">
     <input matInput placeholder="Number within campaign" value="">
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field *ngIf="isOICPost">
     <mat-select placeholder="Game">
       <mat-option *ngFor="let game of supportedGames" [value]="game">
         {{ game }}
@@ -20,17 +28,17 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field *ngIf="isOICPost">
     <input matInput [matDatepicker]="operationDate" placeholder="The date operation took place">
     <mat-datepicker-toggle matSuffix [for]="operationDate"></mat-datepicker-toggle>
     <mat-datepicker #operationDate></mat-datepicker>
   </mat-form-field>
 
-  <mat-form-field class="">
+  <mat-form-field class="" *ngIf="isOICPost">
     <input matInput placeholder="The time the operation took place (ZULU)" value="">
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field *ngIf="isOICPost">
     <mat-select placeholder="Type">
       <mat-option *ngFor="let type of operationTypes" [value]="type">
         {{ type }}
@@ -38,7 +46,7 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field class="">
+  <mat-form-field class="" *ngIf="isOICPost">
     <input type="text" placeholder="Mission OIC" aria-label="mission oic" matInput [formControl]="myControl"
       [matAutocomplete]="officerInCommand">
     <mat-autocomplete #officerInCommand="matAutocomplete" [displayWith]="displayFn">
@@ -48,7 +56,7 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <mat-form-field class="">
+  <mat-form-field class="" *ngIf="isOICPost">
     <input type="text" placeholder="Mission Controller" aria-label="mission controller" matInput [formControl]="myControl"
       [matAutocomplete]="missionController">
     <mat-autocomplete #missionController="matAutocomplete" [displayWith]="displayFn">
@@ -58,6 +66,22 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <app-trooper-chip-select placeholder="Troopers involved in action"></app-trooper-chip-select>
-  <app-trooper-chip-select placeholder="Troopers involved in action"></app-trooper-chip-select>
+  <!-- Attendee reply form -->
+
+  <mat-form-field class="" *ngIf="!isOICPost">
+    <input matInput placeholder="Element callsign" value="">
+  </mat-form-field>
+
+  <mat-form-field class="" *ngIf="!isOICPost">
+    <input type="text" placeholder="Element leader" aria-label="mission controller" matInput [formControl]="myControl"
+      [matAutocomplete]="missionController">
+    <mat-autocomplete #missionController="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of retrievedUsers" [value]="option">
+        {{option.username}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <!-- Shared form -->
+  <app-trooper-chip-select placeholder="7th Cavalry Personnel within Element"></app-trooper-chip-select>
 </div>

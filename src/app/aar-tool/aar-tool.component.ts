@@ -14,6 +14,7 @@ import { debounceTime, distinctUntilChanged, startWith, map } from 'rxjs/operato
 })
 export class AarToolComponent implements OnInit {
 
+  isOICPost: boolean;
   retrievedUsers: User[];
   myControl = new FormControl();
   supportedGames = ['Arma 3', 'Squad', 'Post Scriptum'];
