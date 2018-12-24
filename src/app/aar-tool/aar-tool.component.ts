@@ -3,6 +3,7 @@ import { UserService, User, UserResult } from '../user.service';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, startWith, map } from 'rxjs/operators';
+import bbCodeParser from 'js-bbcode-parser';
 
 @Component({
   selector: 'app-aar-tool',
@@ -41,9 +42,9 @@ export class AarToolComponent implements OnInit {
   [B]7th Cavalry Personnel Involved in Action (Must be copy/pasted from the [URL='https://7cav.us/rosters/']Combat Roster[/URL])[/B]:
   [URL='https://7cav.us/rosters/profile?uniqueid=312']Captain Ryu Mitsuma[/URL]
   [Sp][/Sp]
-  [B]If your name is not listed, or if you have medal recommendations, contact [/B][URL='https://7cav.us/rosters/profile?uniqueid=123']Second Lieutenant Mike LaCombe         [/URL]
-}
+  [B]If your name is not listed, or if you have medal recommendations, contact [/B][URL='https://7cav.us/rosters/profile?uniqueid=123']Second Lieutenant Mike LaCombe[/URL]
 `;
+  htmlPreviewString = '';
 
   filteredOptions: Observable<User[]>;
 
@@ -57,6 +58,7 @@ export class AarToolComponent implements OnInit {
         map(name => name ? this._filter(name) : this.retrievedUsers.slice())
       );
     });
+    this.htmlPreviewString = bbCodeParser.parse(this.template);
   }
 
   displayFn(user?: User): string | undefined {
@@ -65,7 +67,6 @@ export class AarToolComponent implements OnInit {
 
   private _filter(name: string): User[] {
     const filterValue = name.toLowerCase();
-
     return this.retrievedUsers.filter(option => option.username.toLowerCase().indexOf(filterValue) === 0);
   }
 }
