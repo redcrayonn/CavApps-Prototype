@@ -3,7 +3,6 @@ import { UserService, User, UserResult } from '../user.service';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, startWith, map } from 'rxjs/operators';
-import bbCodeParser from 'js-bbcode-parser';
 
 @Component({
   selector: 'app-aar-tool',
@@ -20,7 +19,7 @@ export class AarToolComponent implements OnInit {
   myControl = new FormControl();
   supportedGames = ['Arma 3', 'Squad', 'Post Scriptum'];
   operationTypes = ['Coop', 'Tvt'];
-  template = `[CENTER][B]DEPARTMENT OF THE ARMY
+  bbTemplate = `[CENTER][B]DEPARTMENT OF THE ARMY
   [B][B][B]S3 BATTLE STAFF
   [B]Headquarters
   7th Cavalry Regiment
@@ -44,7 +43,25 @@ export class AarToolComponent implements OnInit {
   [Sp][/Sp]
   [B]If your name is not listed, or if you have medal recommendations, contact [/B][URL='https://7cav.us/rosters/profile?uniqueid=123']Second Lieutenant Mike LaCombe[/URL]
 `;
-  htmlPreviewString = '';
+  htmlTemplate = ``;
+
+  // OIC Post vars
+  fieldMissionName = '';
+  fieldMissionCampaignName = '';
+  fieldMissionCampaignNumber = '';
+  fieldMissionGame = '';
+  fieldMissionDate = '';
+  fieldMissionTime = '';
+  fieldMissionType = '';
+  fieldMissionOIC = '';
+  fieldMissionController = '';
+
+  // Reply post vars
+  fieldElementCallsign = '';
+  fieldElementLeader = '';
+
+  // Shared
+  fieldMissionPersonnel = '';
 
   filteredOptions: Observable<User[]>;
 
@@ -58,7 +75,6 @@ export class AarToolComponent implements OnInit {
         map(name => name ? this._filter(name) : this.retrievedUsers.slice())
       );
     });
-    this.htmlPreviewString = bbCodeParser.parse(this.template);
   }
 
   displayFn(user?: User): string | undefined {

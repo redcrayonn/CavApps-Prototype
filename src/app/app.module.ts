@@ -28,7 +28,7 @@ import { ApplicationsComponent } from './applications/applications.component';
 import { AarToolComponent } from './aar-tool/aar-tool.component';
 import { UserService } from './user.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TrooperChipSelectComponent } from './shared/trooper-chip-select/trooper-chip-select.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
@@ -63,7 +63,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatDatepickerModule,
     MatNativeDateModule,
     MatChipsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    FormsModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
