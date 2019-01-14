@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, User, UserResult } from '../user.service';
-import { Observable } from 'rxjs';
+import { UserService, User, UserResult, Milpac, UserPreview } from '../user.service';
+import { Observable, AsyncSubject } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, startWith, map } from 'rxjs/operators';
 
@@ -53,28 +53,32 @@ export class AarToolComponent implements OnInit {
   fieldMissionDate = '';
   fieldMissionTime = '';
   fieldMissionType = '';
-  fieldMissionOIC = '';
+  fieldMissionOIC: User;
   fieldMissionController = '';
 
-  // Reply post vars
+  // Element post vars
   fieldElementCallsign = '';
   fieldElementLeader = '';
 
   // Shared
   fieldMissionPersonnel = '';
 
+  // Extra preview fields
+  previewOIC: UserPreview;
+
   filteredOptions: Observable<User[]>;
 
-  constructor(private user: UserService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.user.getAll().subscribe(r => {this.retrievedUsers = r; this.filteredOptions = this.myControl.valueChanges
+    this.userService.getAll().subscribe(r => {this.retrievedUsers = r; this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith<string | User>(''),
         map(value => typeof value === 'string' ? value : value.username),
         map(name => name ? this._filter(name) : this.retrievedUsers.slice())
       );
     });
+    this.previewOIC = new UserPreview();
   }
 
   displayFn(user?: User): string | undefined {
@@ -84,5 +88,16 @@ export class AarToolComponent implements OnInit {
   private _filter(name: string): User[] {
     const filterValue = name.toLowerCase();
     return this.retrievedUsers.filter(option => option.username.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  GetPreviewUser(target: UserPreview, user: User) {
+    this.userService.createUserPreview(target, user);
+
+    // this.userService.createUserPreview(user).subscribe(f => console.log(f));
+    // target = this.userService.createUserPreview(user);
+  }
+
+  test() {
+    console.log('test');
   }
 }

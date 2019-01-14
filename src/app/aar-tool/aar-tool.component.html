@@ -46,7 +46,7 @@
   <mat-form-field class="" *ngIf="isOICPost">
     <input type="text" placeholder="Mission OIC" aria-label="mission oic" matInput
       [matAutocomplete]="officerInCommand" [(ngModel)]="fieldMissionOIC">
-    <mat-autocomplete #officerInCommand="matAutocomplete" [displayWith]="displayFn">
+    <mat-autocomplete #officerInCommand="matAutocomplete" [displayWith]="displayFn" (optionSelected)="GetPreviewUser(previewOIC, fieldMissionOIC)">
       <mat-option *ngFor="let option of retrievedUsers" [value]="option">
         {{option.username}}
       </mat-option>
@@ -96,8 +96,7 @@
 <b>Date of Combat Mission</b>: {{fieldMissionDate}}<br>
 <b>Time of Combat Mission (Zulu)</b>: {{fieldMissionTime}} Zulu<br>
 <b>Type of Combat Mission :</b> {{fieldMissionType}}<br>
-<b>Mission OIC: </b><a href="https://7cav.us/rosters/profile?uniqueid=123" class="internalLink">Captain Ryu Mitsuma
-</a><br>
+<b>Mission OIC: </b><a href="https://7cav.us/rosters/profile?uniqueid=123" class="internalLink">Captain {{previewOIC?.milpac?.rank}}</a><br>
 <b>Mission Controller: </b><a href="https://7cav.us/rosters/profile?uniqueid=123" class="internalLink"> Captain Ryu
   Mitsuma </a><br>
 <br>
