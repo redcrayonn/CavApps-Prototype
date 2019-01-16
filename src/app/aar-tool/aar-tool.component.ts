@@ -65,6 +65,7 @@ export class AarToolComponent implements OnInit {
 
   // Extra preview fields
   previewOIC: UserPreview;
+  previewController: UserPreview;
 
   filteredOptions: Observable<User[]>;
 
@@ -79,15 +80,18 @@ export class AarToolComponent implements OnInit {
       );
     });
     this.previewOIC = new UserPreview();
+    this.previewController = new UserPreview();
   }
 
   displayFn(user?: User): string | undefined {
     return user ? user.username : undefined;
   }
 
-  private _filter(name: string): User[] {
-    const filterValue = name.toLowerCase();
-    return this.retrievedUsers.filter(option => option.username.toLowerCase().indexOf(filterValue) === 0);
+  private _filter(filterValue: string): User[] {
+    // const filterValue = name.toLowerCase();
+    // debugger;
+    // return this.retrievedUsers.filter(option => option.username.toLowerCase().indexOf(filterValue) === 0);
+    return this.retrievedUsers.filter(user => !this.retrievedUsers.find(x => x.user_id === user.user_id) && user.username.toLowerCase().indexOf(filterValue) === 0);
   }
 
   GetPreviewUser(target: UserPreview, user: User) {

@@ -4,65 +4,66 @@
     Slide me!
   </mat-slide-toggle>
 
-  <!-- OIC post form -->
-  <mat-form-field class="" *ngIf="isOICPost">
-    <input matInput placeholder="Name of combat mission" [(ngModel)]="fieldMissionName">
-  </mat-form-field>
+  <div *ngIf="isOICPost" class="example-container">
+    <!-- OIC post form -->
+    <mat-form-field class="">
+      <input matInput placeholder="Name of combat mission" [(ngModel)]="fieldMissionName">
+    </mat-form-field>
 
-  <mat-form-field class="" *ngIf="isOICPost">
-    <input matInput placeholder="Campaign of Combat Mission (If applicable)" [(ngModel)]="fieldMissionCampaignName">
-  </mat-form-field>
+    <mat-form-field class="">
+      <input matInput placeholder="Campaign of Combat Mission (If applicable)" [(ngModel)]="fieldMissionCampaignName">
+    </mat-form-field>
 
-  <mat-form-field class="" *ngIf="isOICPost">
-    <input matInput placeholder="Number within campaign" [(ngModel)]="fieldMissionCampaignNumber">
-  </mat-form-field>
+    <mat-form-field class="">
+      <input matInput placeholder="Number within campaign" [(ngModel)]="fieldMissionCampaignNumber">
+    </mat-form-field>
 
-  <mat-form-field *ngIf="isOICPost">
-    <mat-select placeholder="Game" [(ngModel)]="fieldMissionGame">
-      <mat-option *ngFor="let game of supportedGames" [value]="game">
-        {{ game }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Game" [(ngModel)]="fieldMissionGame">
+        <mat-option *ngFor="let game of supportedGames" [value]="game">
+          {{ game }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field *ngIf="isOICPost">
-    <input matInput [matDatepicker]="operationDate" placeholder="The date operation took place" [(ngModel)]="fieldMissionDate">
-    <mat-datepicker-toggle matSuffix [for]="operationDate"></mat-datepicker-toggle>
-    <mat-datepicker #operationDate></mat-datepicker>
-  </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="operationDate" placeholder="The date operation took place" [(ngModel)]="fieldMissionDate">
+      <mat-datepicker-toggle matSuffix [for]="operationDate"></mat-datepicker-toggle>
+      <mat-datepicker #operationDate></mat-datepicker>
+    </mat-form-field>
 
-  <mat-form-field class="" *ngIf="isOICPost">
-    <input matInput placeholder="The time the operation took place (ZULU)" value="" [(ngModel)]="fieldMissionTime">
-  </mat-form-field>
+    <mat-form-field class="">
+      <input matInput placeholder="The time the operation took place (ZULU)" value="" [(ngModel)]="fieldMissionTime">
+    </mat-form-field>
 
-  <mat-form-field *ngIf="isOICPost">
-    <mat-select placeholder="Type" [(ngModel)]="fieldMissionType">
-      <mat-option *ngFor="let type of operationTypes" [value]="type">
-        {{ type }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Type" [(ngModel)]="fieldMissionType">
+        <mat-option *ngFor="let type of operationTypes" [value]="type">
+          {{ type }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field class="" *ngIf="isOICPost">
-    <input type="text" placeholder="Mission OIC" aria-label="mission oic" matInput
-      [matAutocomplete]="officerInCommand" [(ngModel)]="fieldMissionOIC">
-    <mat-autocomplete #officerInCommand="matAutocomplete" [displayWith]="displayFn" (optionSelected)="GetPreviewUser(previewOIC, fieldMissionOIC)">
-      <mat-option *ngFor="let option of retrievedUsers" [value]="option">
-        {{option.username}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+    <mat-form-field class="">
+      <input type="text" placeholder="Mission OIC" aria-label="mission oic" matInput [matAutocomplete]="officerInCommand"
+        [(ngModel)]="fieldMissionOIC">
+      <mat-autocomplete #officerInCommand="matAutocomplete" [displayWith]="displayFn" (optionSelected)="GetPreviewUser(previewOIC, fieldMissionOIC)">
+        <mat-option *ngFor="let option of retrievedUsers" [value]="option">
+          {{option.username}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
 
-  <mat-form-field class="" *ngIf="isOICPost">
-    <input type="text" placeholder="Mission Controller" aria-label="mission controller" matInput
-      [matAutocomplete]="missionController" [(ngModel)]="fieldMissionController">
-    <mat-autocomplete #missionController="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let option of retrievedUsers" [value]="option">
-        {{option.username}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-
+    <mat-form-field class="">
+      <input type="text" placeholder="Mission Controller" aria-label="mission controller" matInput [matAutocomplete]="missionController"
+        [(ngModel)]="fieldMissionController">
+      <mat-autocomplete #missionController="matAutocomplete" [displayWith]="displayFn" (optionSelected)="GetPreviewUser(previewController, fieldMissionController)">
+        <mat-option *ngFor="let option of retrievedUsers" [value]="option">
+          {{option.username}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
   <!-- Attendee reply form -->
 
   <mat-form-field class="" *ngIf="!isOICPost">
@@ -70,8 +71,8 @@
   </mat-form-field>
 
   <mat-form-field class="" *ngIf="!isOICPost">
-    <input type="text" placeholder="Element leader" aria-label="mission controller" matInput
-      [matAutocomplete]="missionController" [(ngModel)]="fieldElementLeader">
+    <input type="text" placeholder="Element leader" aria-label="mission controller" matInput [matAutocomplete]="missionController"
+      [(ngModel)]="fieldElementLeader">
     <mat-autocomplete #missionController="matAutocomplete" [displayWith]="displayFn">
       <mat-option *ngFor="let option of retrievedUsers" [value]="option">
         {{option.username}}
@@ -96,9 +97,9 @@
 <b>Date of Combat Mission</b>: {{fieldMissionDate}}<br>
 <b>Time of Combat Mission (Zulu)</b>: {{fieldMissionTime}} Zulu<br>
 <b>Type of Combat Mission :</b> {{fieldMissionType}}<br>
-<b>Mission OIC: </b><a href="https://7cav.us/rosters/profile?uniqueid=123" class="internalLink">Captain {{previewOIC?.milpac?.rank}}</a><br>
-<b>Mission Controller: </b><a href="https://7cav.us/rosters/profile?uniqueid=123" class="internalLink"> Captain Ryu
-  Mitsuma </a><br>
+<b>Mission OIC: </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}" class="internalLink">{{previewOIC?.milpac?.rank}}
+  {{ previewOIC?.milpac?.username }}</a><br>
+<b>Mission Controller: </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewController?.milpac?.milpac_id}}" class="internalLink"> {{previewController?.milpac?.rank}} {{ previewController?.milpac?.username }}</a><br>
 <br>
 <b>Number of Attendees (Reserved for AAR Clerk): </b><br>
 <br>
