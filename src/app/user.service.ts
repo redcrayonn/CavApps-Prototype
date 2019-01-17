@@ -50,6 +50,15 @@ export class UserService {
       target.user = user;
     });
   }
+
+  addUserPreview(target: UserPreview[], user: User) {
+    this.getMilpac(user.user_id).subscribe(milpac => {
+      const preview = new UserPreview();
+      preview.milpac = milpac;
+      preview.user = user;
+      target.push(preview);
+    });
+  }
 }
 
 export class User {

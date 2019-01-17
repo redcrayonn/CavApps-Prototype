@@ -1,5 +1,5 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, ElementRef, ViewChild, OnInit, Input} from '@angular/core';
+import {Component, ElementRef, ViewChild, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete} from '@angular/material';
 import {Observable} from 'rxjs';
@@ -14,6 +14,7 @@ import { User, UserService } from '../../user.service';
 export class TrooperChipSelectComponent implements OnInit {
 
   @Input() placeholder: string;
+  @Output() optionSelected = new EventEmitter();
 
   visible = true;
   selectable = true;
@@ -74,6 +75,7 @@ export class TrooperChipSelectComponent implements OnInit {
     this.selectedUsers.push(event.option.value);
     this.fruitInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
+    this.optionSelected.emit(event.option.value);
   }
 
   private _filter(filterValue: string): User[] {
