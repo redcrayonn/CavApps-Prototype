@@ -11,9 +11,6 @@
       <input matInput placeholder="Name of combat mission" [(ngModel)]="fieldMissionName">
     </mat-form-field>
 
-    <!-- Shared form -->
-    <app-trooper-chip-select placeholder="7th Cavalry Personnel within Element" (optionSelected)="AddPreviewUser(previewAttendees, $event)"></app-trooper-chip-select>
-
     <mat-form-field class="">
       <input matInput placeholder="Campaign of Combat Mission (If applicable)" [(ngModel)]="fieldMissionCampaignName">
     </mat-form-field>
@@ -69,22 +66,30 @@
     </mat-form-field>
   </div>
   <!-- Attendee reply form -->
+  <div class="example-container">
+      <mat-form-field class="" *ngIf="!isOICPost">
+          <input matInput placeholder="Element callsign" value="" [(ngModel)]="fieldElementCallsign">
+      </mat-form-field>
+    
+      <mat-form-field class="" *ngIf="!isOICPost">
+        <input type="text" placeholder="Element leader" aria-label="mission controller" matInput [matAutocomplete]="missionController"
+          [(ngModel)]="fieldElementLeader">
+        <mat-autocomplete #missionController="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of retrievedUsers" [value]="option">
+            {{option.username}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+  </div>
 
-  <mat-form-field class="" *ngIf="!isOICPost">
-    <input matInput placeholder="Element callsign" value="" [(ngModel)]="fieldElementCallsign">
-  </mat-form-field>
-
-  <mat-form-field class="" *ngIf="!isOICPost">
-    <input type="text" placeholder="Element leader" aria-label="mission controller" matInput [matAutocomplete]="missionController"
-      [(ngModel)]="fieldElementLeader">
-    <mat-autocomplete #missionController="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let option of retrievedUsers" [value]="option">
-        {{option.username}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-
-  
+  <div class="example-container">
+    <!-- Shared form -->
+    <app-trooper-chip-select 
+      placeholder="7th Cavalry Personnel within Element" 
+      (optionSelected)="AddPreviewUser(previewAttendees, $event)"
+      (optionRemoved)="RemovePreviewUser(previewAttendees, $event)"
+      ></app-trooper-chip-select>
+  </div>
 </div>
 
 <!-- Preview -->

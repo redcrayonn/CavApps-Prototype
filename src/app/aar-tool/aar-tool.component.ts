@@ -103,6 +103,14 @@ export class AarToolComponent implements OnInit {
     this.userService.addUserPreview(target, user);
   }
 
+  RemovePreviewUser(target: UserPreview[], user: User) {
+    target.forEach( (item, index) => {
+      if (item.user.user_id === user.user_id) {
+        target.splice(index, 1);
+      }
+    });
+  }
+
   test() {
     console.log('test');
   }

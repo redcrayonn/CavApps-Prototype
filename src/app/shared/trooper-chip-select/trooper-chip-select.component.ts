@@ -15,6 +15,7 @@ export class TrooperChipSelectComponent implements OnInit {
 
   @Input() placeholder: string;
   @Output() optionSelected = new EventEmitter();
+  @Output() optionRemoved = new EventEmitter();
 
   visible = true;
   selectable = true;
@@ -68,6 +69,7 @@ export class TrooperChipSelectComponent implements OnInit {
 
     if (index >= 0) {
       this.selectedUsers.splice(index, 1);
+      this.optionRemoved.emit(user);
     }
   }
 
