@@ -72,10 +72,12 @@ export class TrooperChipSelectComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.selectedUsers.push(event.option.value);
-    this.fruitInput.nativeElement.value = '';
-    this.userCtrl.setValue(null);
-    this.optionSelected.emit(event.option.value);
+    if (event.option.value) {
+      this.selectedUsers.push(event.option.value);
+      this.fruitInput.nativeElement.value = '';
+      this.userCtrl.setValue(null);
+      this.optionSelected.emit(event.option.value);
+    }
   }
 
   private _filter(filterValue: string): User[] {

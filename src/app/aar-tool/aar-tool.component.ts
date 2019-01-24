@@ -66,7 +66,7 @@ export class AarToolComponent implements OnInit {
   // Extra preview fields
   previewOIC: UserPreview;
   previewController: UserPreview;
-  previewAttendees: UserPreview[];
+  previewAttendees: UserPreview[] = [];
 
   filteredOptions: Observable<User[]>;
 
@@ -82,7 +82,6 @@ export class AarToolComponent implements OnInit {
     });
     this.previewOIC = new UserPreview();
     this.previewController = new UserPreview();
-    this.previewAttendees = [];
   }
 
   displayFn(user?: User): string | undefined {

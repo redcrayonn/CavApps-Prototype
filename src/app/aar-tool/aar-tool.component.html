@@ -1,5 +1,6 @@
 <div id="temp-center" class="example-container">
 
+  
   <mat-slide-toggle class="example-margin" checked="isOICPost" (change)="isOICPost = !isOICPost">
     Slide me!
   </mat-slide-toggle>
@@ -9,6 +10,9 @@
     <mat-form-field class="">
       <input matInput placeholder="Name of combat mission" [(ngModel)]="fieldMissionName">
     </mat-form-field>
+
+    <!-- Shared form -->
+    <app-trooper-chip-select placeholder="7th Cavalry Personnel within Element" (optionSelected)="AddPreviewUser(previewAttendees, $event)"></app-trooper-chip-select>
 
     <mat-form-field class="">
       <input matInput placeholder="Campaign of Combat Mission (If applicable)" [(ngModel)]="fieldMissionCampaignName">
@@ -80,8 +84,7 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <!-- Shared form -->
-  <app-trooper-chip-select placeholder="7th Cavalry Personnel within Element" (optionSelected)="AddPreviewUser(previewAttendees, $event)"></app-trooper-chip-select>
+  
 </div>
 
 <!-- Preview -->
@@ -105,11 +108,11 @@
 <br>
 <b>7th Cavalry Personnel Involved in Action (Must be copy/pasted from the <a href="https://7cav.us/rosters/" class="internalLink">Combat
     Roster</a>)</b>:<br>
-  <a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac.milpac_id}}">{{previewOIC?.milpac?.rank}}
+  <a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}">{{previewOIC?.milpac?.rank}}
     {{ previewOIC?.milpac?.username }}<br></a>
-    <a href="https://7cav.us/rosters/profile?uniqueid={{previewController?.milpac.milpac_id}}">{{previewController?.milpac?.rank}}
+    <a href="https://7cav.us/rosters/profile?uniqueid={{previewController?.milpac?.milpac_id}}">{{previewController?.milpac?.rank}}
       {{ previewController?.milpac?.username }}<br></a>
-<a *ngFor="let previewAttendee of previewAttendees" href="https://7cav.us/rosters/profile?uniqueid={{previewAttendee?.milpac.milpac_id}}">{{previewAttendee?.milpac?.rank}}
+<a *ngFor="let previewAttendee of previewAttendees" href="https://7cav.us/rosters/profile?uniqueid={{previewAttendee?.milpac?.milpac_id}}">{{previewAttendee?.milpac?.rank}}
   {{ previewAttendee?.milpac?.username }}<br></a>
 <b>If your name is not listed, or if you have medal recommendations, contact </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}"
   class="internalLink">{{previewOIC?.milpac?.rank}} {{previewOIC?.user?.username}} </a>
