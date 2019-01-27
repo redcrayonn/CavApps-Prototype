@@ -70,6 +70,17 @@
     <app-trooper-chip-select placeholder="7th Cavalry Personnel within Element" (optionSelected)="AddPreviewUser(previewAttendees, $event)"
       (optionRemoved)="RemovePreviewUser(previewAttendees, $event)"></app-trooper-chip-select>
   </div>
+
+  <div *ngIf="!isOICPost" class="example-container">
+    <mat-form-field>
+      <mat-label>Pro's: </mat-label>
+      <textarea [(ngModel)]="fieldPros" matInput cdkTextareaAutosize #autosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="15"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Con's: </mat-label>
+        <textarea [(ngModel)]="fieldCons" matInput cdkTextareaAutosize #autosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="15"></textarea>
+      </mat-form-field>
+  </div>
 </div>
 
 <!-- OIC Preview -->
@@ -125,6 +136,15 @@
       Roster</a>)</b>:<br>
   <a *ngFor="let previewAttendee of previewAttendees" href="https://7cav.us/rosters/profile?uniqueid={{previewAttendee?.milpac?.milpac_id}}">{{previewAttendee?.milpac?.rank}}
     {{ previewAttendee?.milpac?.username }}<br></a>
+    <br>
+    <b>Pro's: </b><br>
+    <br>
+  <span style="white-space:pre-wrap;">{{fieldPros}}</span><br>
+  <b>Con's: </b><br>
+  <br>
+  <span style="white-space:pre-wrap;">{{fieldCons}}</span><br>
+  <br>
+
   <b>If your name is not listed, or if you have medal recommendations, contact </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}"
     class="internalLink">{{previewOIC?.milpac?.rank}} {{previewOIC?.user?.username}} </a>
   <div class="messageTextEndMarker">&nbsp;</div>

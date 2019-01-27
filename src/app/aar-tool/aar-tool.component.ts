@@ -62,6 +62,8 @@ export class AarToolComponent implements OnInit {
   // Element post vars
   fieldElementCallsign = '';
   fieldElementLeader = '';
+  fieldPros = '';
+  fieldCons = '';
 
   // Shared
   fieldMissionPersonnel = '';
