@@ -18,6 +18,8 @@ export class TrooperChipSelectComponent implements OnInit {
   @Output() optionSelected = new EventEmitter();
   @Output() optionRemoved = new EventEmitter();
 
+  // TODO: perhaps instead of calling multiple optionselected / removed events just add an ngmodel input like standard angular components.
+
   visible = true;
   selectable = true;
   removable = true;

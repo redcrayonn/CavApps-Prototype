@@ -1,6 +1,6 @@
 <div id="temp-center" class="example-container">
 
-  
+
   <mat-slide-toggle class="example-margin" checked="isOICPost" (change)="isOICPost = !isOICPost">
     Slide me!
   </mat-slide-toggle>
@@ -45,32 +45,28 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="">
-      <input type="text" placeholder="Mission OIC" aria-label="mission oic" matInput [matAutocomplete]="officerInCommand"
-        [(ngModel)]="fieldMissionOIC">
-      <mat-autocomplete #officerInCommand="matAutocomplete" [displayWith]="displayFn" (optionSelected)="GetPreviewUser(previewOIC, fieldMissionOIC)">
-        <mat-option *ngFor="let option of retrievedUsers" [value]="option">
-          {{option.username}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+    <app-trooper-chip-select
+      placeholder="Mission Officer in Charge (OIC)"
+      singleSelection = "True"
+      (optionSelected)="fieldMissionOIC = $event" 
+      (optionSelected)="GetPreviewUser(previewOIC, fieldMissionOIC)"
+      (optionRemoved)="fieldMissionOIC = undefined"
+      ></app-trooper-chip-select>
 
-    <mat-form-field class="">
-      <input type="text" placeholder="Mission Controller" aria-label="mission controller" matInput [matAutocomplete]="missionController"
-        [(ngModel)]="fieldMissionController">
-      <mat-autocomplete #missionController="matAutocomplete" [displayWith]="displayFn" (optionSelected)="GetPreviewUser(previewController, fieldMissionController)">
-        <mat-option *ngFor="let option of retrievedUsers" [value]="option">
-          {{option.username}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+    <app-trooper-chip-select
+      placeholder="Mission Controller"
+      singleSelection = "True"
+      (optionSelected)="fieldMissionController = $event" 
+      (optionSelected)="GetPreviewUser(previewController, fieldMissionController)"
+      (optionRemoved)="fieldMissionController = undefined"
+      ></app-trooper-chip-select>
   </div>
   <!-- Attendee reply form -->
   <div class="example-container">
       <mat-form-field class="" *ngIf="!isOICPost">
           <input matInput placeholder="Element callsign" value="" [(ngModel)]="fieldElementCallsign">
       </mat-form-field>
-    
+
       <mat-form-field class="" *ngIf="!isOICPost">
         <input type="text" placeholder="Element leader" aria-label="mission controller" matInput [matAutocomplete]="missionController"
           [(ngModel)]="fieldElementLeader">
@@ -84,8 +80,8 @@
 
   <div class="example-container">
     <!-- Shared form -->
-    <app-trooper-chip-select 
-      placeholder="7th Cavalry Personnel within Element" 
+    <app-trooper-chip-select
+      placeholder="7th Cavalry Personnel within Element"
       (optionSelected)="AddPreviewUser(previewAttendees, $event)"
       (optionRemoved)="RemovePreviewUser(previewAttendees, $event)"
       ></app-trooper-chip-select>
