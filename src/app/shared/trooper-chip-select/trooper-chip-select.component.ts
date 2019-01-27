@@ -14,6 +14,7 @@ import { User, UserService } from '../../user.service';
 export class TrooperChipSelectComponent implements OnInit {
 
   @Input() placeholder: string;
+  @Input() singleSelection: Boolean = false;
   @Output() optionSelected = new EventEmitter();
   @Output() optionRemoved = new EventEmitter();
 
@@ -73,11 +74,25 @@ export class TrooperChipSelectComponent implements OnInit {
     }
   }
 
+  removeAll(): void {
+    this.selectedUsers = [];
+  }
+
   selected(event: MatAutocompleteSelectedEvent): void {
     if (event.option.value) {
-      this.selectedUsers.push(event.option.value);
+      if (this.singleSelection) {
+        // clear list
+        this.removeAll();
+        // add new user
+        this.selectedUsers.push(event.option.value);
+      } else {
+        this.selectedUsers.push(event.option.value);
+      }
+      // wtf?
       this.fruitInput.nativeElement.value = '';
+      // clear input
       this.userCtrl.setValue(null);
+      // emit selected event
       this.optionSelected.emit(event.option.value);
     }
   }

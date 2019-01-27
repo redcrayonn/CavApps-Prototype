@@ -100,16 +100,17 @@
             COMBAT AFTER ACTION REPORT</b><br>
         </b></b></b></b>​</div><b>Name of Combat Mission</b>: {{fieldMissionName}}<br>
 <b>Campaign of Combat Mission </b>(If applicable): {{fieldMissionCampaignName}}<br>
+<b>Number within campaign</b>(If applicable): {{fieldMissionCampaignNumber}}<br>
 <br>
 <b>Game</b>: {{fieldMissionGame}}<br>
-<b>Date of Combat Mission</b>: {{fieldMissionDate}}<br>
+<b>Date of Combat Mission</b>: {{fieldMissionDate?.getUTCDay()}}{{monthNames[fieldMissionDate?.getMonth()]}}{{fieldMissionDate?.getUTCFullYear().toString().substring(2)}}<br>
 <b>Time of Combat Mission (Zulu)</b>: {{fieldMissionTime}} Zulu<br>
 <b>Type of Combat Mission :</b> {{fieldMissionType}}<br>
 <b>Mission OIC: </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}" class="internalLink">{{previewOIC?.milpac?.rank}}
   {{ previewOIC?.milpac?.username }}</a><br>
 <b>Mission Controller: </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewController?.milpac?.milpac_id}}" class="internalLink"> {{previewController?.milpac?.rank}} {{ previewController?.milpac?.username }}</a><br>
 <br>
-<b>Number of Attendees (Reserved for AAR Clerk): {{previewAttendees?.length}}</b><br>
+<b>Number of Attendees (Reserved for AAR Clerk): {{previewAttendees?.length + 2}}</b><br>
 <br>
 <b>7th Cavalry Personnel Involved in Action (Must be copy/pasted from the <a href="https://7cav.us/rosters/" class="internalLink">Combat
     Roster</a>)</b>:<br>

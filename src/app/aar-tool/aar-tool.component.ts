@@ -14,6 +14,9 @@ import { debounceTime, distinctUntilChanged, startWith, map } from 'rxjs/operato
 })
 export class AarToolComponent implements OnInit {
 
+  monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
+  'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
+  ];
   isOICPost: boolean;
   retrievedUsers: User[];
   myControl = new FormControl();
@@ -50,7 +53,7 @@ export class AarToolComponent implements OnInit {
   fieldMissionCampaignName = '';
   fieldMissionCampaignNumber = '';
   fieldMissionGame = '';
-  fieldMissionDate = '';
+  fieldMissionDate: Date;
   fieldMissionTime = '';
   fieldMissionType = '';
   fieldMissionOIC: User;
