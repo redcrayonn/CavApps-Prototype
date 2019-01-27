@@ -45,77 +45,87 @@
       </mat-select>
     </mat-form-field>
 
-    <app-trooper-chip-select
-      placeholder="Mission Officer in Charge (OIC)"
-      singleSelection = "True"
-      (optionSelected)="fieldMissionOIC = $event" 
-      (optionSelected)="GetPreviewUser(previewOIC, fieldMissionOIC)"
-      (optionRemoved)="fieldMissionOIC = undefined"
-      ></app-trooper-chip-select>
+    <app-trooper-chip-select placeholder="Mission Officer in Charge (OIC)" singleSelection="True" (optionSelected)="fieldMissionOIC = $event"
+      (optionSelected)="GetPreviewUser(previewOIC, fieldMissionOIC)" (optionRemoved)="fieldMissionOIC = undefined"></app-trooper-chip-select>
 
-    <app-trooper-chip-select
-      placeholder="Mission Controller"
-      singleSelection = "True"
-      (optionSelected)="fieldMissionController = $event" 
-      (optionSelected)="GetPreviewUser(previewController, fieldMissionController)"
-      (optionRemoved)="fieldMissionController = undefined"
-      ></app-trooper-chip-select>
+    <app-trooper-chip-select placeholder="Mission Controller" singleSelection="True" (optionSelected)="fieldMissionController = $event"
+      (optionSelected)="GetPreviewUser(previewController, fieldMissionController)" (optionRemoved)="fieldMissionController = undefined"></app-trooper-chip-select>
   </div>
   <!-- Attendee reply form -->
-  <div class="example-container">
-      <mat-form-field class="" *ngIf="!isOICPost">
-          <input matInput placeholder="Element callsign" value="" [(ngModel)]="fieldElementCallsign">
-      </mat-form-field>
+  <div *ngIf="!isOICPost" class="example-container">
+    <mat-form-field class="">
+      <input matInput placeholder="Element callsign" value="" [(ngModel)]="fieldElementCallsign">
+    </mat-form-field>
 
-      <mat-form-field class="" *ngIf="!isOICPost">
-        <input type="text" placeholder="Element leader" aria-label="mission controller" matInput [matAutocomplete]="missionController"
-          [(ngModel)]="fieldElementLeader">
-        <mat-autocomplete #missionController="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let option of retrievedUsers" [value]="option">
-            {{option.username}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+    <app-trooper-chip-select 
+      placeholder="Element Leader" 
+      singleSelection="True" 
+      (optionSelected)="fieldElementLeader = $event"
+      (optionSelected)="GetPreviewUser(previewElementLeader, fieldElementLeader)" 
+      (optionRemoved)="fieldElementLeader = undefined"></app-trooper-chip-select>
   </div>
 
   <div class="example-container">
     <!-- Shared form -->
-    <app-trooper-chip-select
-      placeholder="7th Cavalry Personnel within Element"
-      (optionSelected)="AddPreviewUser(previewAttendees, $event)"
-      (optionRemoved)="RemovePreviewUser(previewAttendees, $event)"
-      ></app-trooper-chip-select>
+    <app-trooper-chip-select placeholder="7th Cavalry Personnel within Element" (optionSelected)="AddPreviewUser(previewAttendees, $event)"
+      (optionRemoved)="RemovePreviewUser(previewAttendees, $event)"></app-trooper-chip-select>
   </div>
 </div>
 
-<!-- Preview -->
-<div style="text-align: center"><b>DEPARTMENT OF THE ARMY<br>
-    <b><b><b>S3 BATTLE STAFF<br>
-          <b>Headquarters<br>
-            7th Cavalry Regiment<br>
-            COMBAT AFTER ACTION REPORT</b><br>
-        </b></b></b></b>​</div><b>Name of Combat Mission</b>: {{fieldMissionName}}<br>
-<b>Campaign of Combat Mission </b>(If applicable): {{fieldMissionCampaignName}}<br>
-<b>Number within campaign</b>(If applicable): {{fieldMissionCampaignNumber}}<br>
-<br>
-<b>Game</b>: {{fieldMissionGame}}<br>
-<b>Date of Combat Mission</b>: {{fieldMissionDate?.getUTCDay()}}{{monthNames[fieldMissionDate?.getMonth()]}}{{fieldMissionDate?.getUTCFullYear().toString().substring(2)}}<br>
-<b>Time of Combat Mission (Zulu)</b>: {{fieldMissionTime}} Zulu<br>
-<b>Type of Combat Mission :</b> {{fieldMissionType}}<br>
-<b>Mission OIC: </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}" class="internalLink">{{previewOIC?.milpac?.rank}}
-  {{ previewOIC?.milpac?.username }}</a><br>
-<b>Mission Controller: </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewController?.milpac?.milpac_id}}" class="internalLink"> {{previewController?.milpac?.rank}} {{ previewController?.milpac?.username }}</a><br>
-<br>
-<b>Number of Attendees (Reserved for AAR Clerk): {{previewAttendees?.length + 2}}</b><br>
-<br>
-<b>7th Cavalry Personnel Involved in Action (Must be copy/pasted from the <a href="https://7cav.us/rosters/" class="internalLink">Combat
-    Roster</a>)</b>:<br>
-  <a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}">{{previewOIC?.milpac?.rank}}
+<!-- OIC Preview -->
+<div *ngIf="isOICPost">
+  <div style="text-align: center"><b>DEPARTMENT OF THE ARMY<br>
+      <b><b><b>S3 BATTLE STAFF<br>
+            <b>Headquarters<br>
+              7th Cavalry Regiment<br>
+              COMBAT AFTER ACTION REPORT</b><br>
+          </b></b></b></b>​</div><b>Name of Combat Mission</b>: {{fieldMissionName}}<br>
+  <b>Campaign of Combat Mission </b>(If applicable): {{fieldMissionCampaignName}}<br>
+  <b>Number within campaign</b>(If applicable): {{fieldMissionCampaignNumber}}<br>
+  <br>
+  <b>Game</b>: {{fieldMissionGame}}<br>
+  <b>Date of Combat Mission</b>:
+  {{fieldMissionDate?.getUTCDay()}}{{monthNames[fieldMissionDate?.getMonth()]}}{{fieldMissionDate?.getUTCFullYear().toString().substring(2)}}<br>
+  <b>Time of Combat Mission (Zulu)</b>: {{fieldMissionTime}} Zulu<br>
+  <b>Type of Combat Mission :</b> {{fieldMissionType}}<br>
+  <b>Mission OIC: </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}" class="internalLink">{{previewOIC?.milpac?.rank}}
+    {{ previewOIC?.milpac?.username }}</a><br>
+  <b>Mission Controller: </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewController?.milpac?.milpac_id}}"
+    class="internalLink"> {{previewController?.milpac?.rank}} {{ previewController?.milpac?.username }}</a><br>
+  <br>
+  <b>Number of Attendees (Reserved for AAR Clerk): {{previewAttendees?.length + 2}}</b><br>
+  <br>
+  <b>7th Cavalry Personnel Involved in Action (Must be copy/pasted from the <a href="https://7cav.us/rosters/" class="internalLink">Combat
+      Roster</a>)</b>:<br>
+  <a *ngIf="previewOIC?.milpac" href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}">{{previewOIC?.milpac?.rank}}
     {{ previewOIC?.milpac?.username }}<br></a>
-    <a href="https://7cav.us/rosters/profile?uniqueid={{previewController?.milpac?.milpac_id}}">{{previewController?.milpac?.rank}}
-      {{ previewController?.milpac?.username }}<br></a>
-<a *ngFor="let previewAttendee of previewAttendees" href="https://7cav.us/rosters/profile?uniqueid={{previewAttendee?.milpac?.milpac_id}}">{{previewAttendee?.milpac?.rank}}
-  {{ previewAttendee?.milpac?.username }}<br></a>
-<b>If your name is not listed, or if you have medal recommendations, contact </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}"
-  class="internalLink">{{previewOIC?.milpac?.rank}} {{previewOIC?.user?.username}} </a>
-<div class="messageTextEndMarker">&nbsp;</div>
+  <a *ngIf="previewController?.milpac" href="https://7cav.us/rosters/profile?uniqueid={{previewController?.milpac?.milpac_id}}">{{previewController?.milpac?.rank}}
+    {{ previewController?.milpac?.username }}<br></a>
+  <a *ngFor="let previewAttendee of previewAttendees" href="https://7cav.us/rosters/profile?uniqueid={{previewAttendee?.milpac?.milpac_id}}">{{previewAttendee?.milpac?.rank}}
+    {{ previewAttendee?.milpac?.username }}<br></a>
+    <br>
+  <b>If your name is not listed, or if you have medal recommendations, contact </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}"
+    class="internalLink">{{previewOIC?.milpac?.rank}} {{previewOIC?.user?.username}} </a>
+  <div class="messageTextEndMarker">&nbsp;</div>
+</div>
+<!-- Element Preview -->
+
+<div *ngIf="!isOICPost">
+  <div style="text-align: center"><b>DEPARTMENT OF THE ARMY<br>
+      <b><b><b>S3 BATTLE STAFF<br>
+            <b>Headquarters<br>
+              7th Cavalry Regiment<br>
+              COMBAT AFTER ACTION REPORT</b><br>
+          </b></b></b></b>​</div><b>Name of Combat Mission</b>: {{fieldMissionName}}<br>
+  <b>Element Callsign: </b> {{fieldElementCallsign}}<br>
+  <b>Element Leader: <a href="https://7cav.us/rosters/profile?uniqueid={{previewElementLeader?.milpac?.milpac_id}}" class="internalLink">{{previewElementLeader?.milpac?.rank}}
+    {{ previewElementLeader?.milpac?.username }}</a></b><br>
+  <br>
+  <b>7th Cavalry Personnel Involved in Action (Must be copy/pasted from the <a href="https://7cav.us/rosters/" class="internalLink">Combat
+      Roster</a>)</b>:<br>
+  <a *ngFor="let previewAttendee of previewAttendees" href="https://7cav.us/rosters/profile?uniqueid={{previewAttendee?.milpac?.milpac_id}}">{{previewAttendee?.milpac?.rank}}
+    {{ previewAttendee?.milpac?.username }}<br></a>
+  <b>If your name is not listed, or if you have medal recommendations, contact </b><a href="https://7cav.us/rosters/profile?uniqueid={{previewOIC?.milpac?.milpac_id}}"
+    class="internalLink">{{previewOIC?.milpac?.rank}} {{previewOIC?.user?.username}} </a>
+  <div class="messageTextEndMarker">&nbsp;</div>
+</div>

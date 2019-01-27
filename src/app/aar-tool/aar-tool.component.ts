@@ -71,6 +71,9 @@ export class AarToolComponent implements OnInit {
   previewController: UserPreview;
   previewAttendees: UserPreview[] = [];
 
+  previewElementCallsign: string = this.fieldElementCallsign;
+  previewElementLeader: UserPreview = new UserPreview();
+
   filteredOptions: Observable<User[]>;
 
   constructor(private userService: UserService) { }
